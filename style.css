@@ -1,0 +1,323 @@
+
+/* ===== GLOBAL STYLES ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #fffafa;
+    color: #252525;
+    min-height: 100vh;
+}
+
+/* ===== NAVBAR ===== */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 8%;
+    background: #ffffff;
+    box-shadow: 0 3px 18px rgba(70, 0, 0, 0.07);
+    position: relative;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: 800;
+    color: #b5122b;
+    letter-spacing: -0.5px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+nav a {
+    color: #333333;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 11px 16px;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+}
+
+nav a:hover {
+    color: #b5122b;
+    background: #fff0f2;
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    padding: 85px 10%;
+    min-height: 440px;
+    background: linear-gradient(120deg, #fff5f5, #ffffff);
+}
+
+.text {
+    width: 55%;
+}
+
+.text h1 {
+    font-size: clamp(42px, 5vw, 66px);
+    line-height: 1.1;
+    letter-spacing: -2px;
+    color: #281c20;
+    margin-bottom: 22px;
+}
+
+.tagline {
+    display: inline-block;
+    color: #b5122b;
+    background: #ffe7eb;
+    font-size: 21px;
+    font-weight: 700;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 22px;
+}
+
+.text p {
+    max-width: 490px;
+    color: #686168;
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+.medical {
+    width: 40%;
+    min-height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(
+        circle,
+        #ffe1e6 0%,
+        #fff0f2 48%,
+        transparent 70%
+    );
+    border-radius: 50%;
+}
+
+.heart {
+    font-size: clamp(120px, 15vw, 180px);
+    line-height: 1;
+    color: #c71936;
+    text-shadow: 0 15px 35px rgba(181, 18, 43, 0.15);
+    animation: heartBeat 2s ease-in-out infinite;
+}
+
+/* Remove the old misplaced horizontal line */
+.heartbeat {
+    display: none !important;
+}
+
+/* ===== FEATURE CARDS ===== */
+.cards {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 25px;
+    padding: 55px 8%;
+    flex-wrap: wrap;
+    background: #ffffff;
+}
+
+.card {
+    flex: 1 1 230px;
+    max-width: 310px;
+    min-height: 220px;
+    padding: 32px 25px;
+    text-align: center;
+    background: #ffffff;
+    border: 1px solid #f1dfe3;
+    border-radius: 18px;
+    box-shadow: 0 8px 28px rgba(80, 0, 20, 0.06);
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease,
+                border-color 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: #e9a0ae;
+    box-shadow: 0 16px 35px rgba(130, 0, 25, 0.12);
+}
+
+.card .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 65px;
+    height: 65px;
+    border-radius: 18px;
+    background: #fff0f2;
+    font-size: 34px;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    color: #a90e28;
+    font-size: 20px;
+    margin: 8px 0 12px;
+}
+
+.card p {
+    color: #686168;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    padding: 24px 15px;
+    text-align: center;
+    background: #291b20;
+    color: #f9e9ec;
+    font-size: 14px;
+}
+
+/* ===== ANIMATION ===== */
+@keyframes heartBeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    15% {
+        transform: scale(1.07);
+    }
+
+    30% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.04);
+    }
+}
+
+/* ===== TABLET AND MOBILE ===== */
+@media (max-width: 800px) {
+    header {
+        padding: 20px 5%;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    nav {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+
+    nav a {
+        font-size: 14px;
+        padding: 9px 11px;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 55px 6% 35px;
+        gap: 25px;
+    }
+
+    .text,
+    .medical {
+        width: 100%;
+    }
+
+    .text h1 {
+        font-size: 43px;
+        letter-spacing: -1px;
+    }
+
+    .tagline {
+        font-size: 18px;
+    }
+
+    .text p {
+        margin: 0 auto;
+        font-size: 16px;
+    }
+
+    .medical {
+        min-height: 190px;
+        max-width: 300px;
+    }
+
+    .heart {
+        font-size: 120px;
+    }
+
+    .cards {
+        padding: 35px 6%;
+        gap: 18px;
+    }
+
+    .card {
+        flex: 1 1 100%;
+        max-width: 380px;
+        min-height: auto;
+    }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Navigation links */
+header nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+header nav a {
+    color: #333333;
+    text-decoration: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+header nav a:hover {
+    color: #b5122b;
+    background: #fff0f2;
+}
+
+@media (max-width: 800px) {
+    header nav {
+        gap: 4px;
+    }
+
+    header nav a {
+        padding: 9px 10px;
+        font-size: 13px;
+    }
+}

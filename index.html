@@ -2,150 +2,8 @@
 <html>
 <head>
     <title>Blood Bank Management System</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #b30000, #ff4040);
-            color: white;
-            min-height: 100vh;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 25px 8%;
-        }
-
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 30px;
-            font-size: 17px;
-        }
-
-        nav a:hover {
-            color: #ffd6d6;
-        }
-
-        .hero {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 60px 10%;
-            gap: 50px;
-        }
-
-        .text {
-            width: 50%;
-        }
-
-        .text h1 {
-            font-size: 65px;
-            margin-bottom: 15px;
-            letter-spacing: 3px;
-        }
-
-        .tagline {
-            font-size: 24px;
-            font-weight: bold;
-            color: #ffe082;
-            margin-bottom: 25px;
-        }
-
-        .text p {
-            font-size: 20px;
-            line-height: 1.5;
-        }
-
-        .medical {
-            width: 40%;
-            text-align: center;
-        }
-
-        .heart {
-            font-size: 150px;
-            position: relative;
-        }
-
-        .heartbeat {
-            position: absolute;
-            left: 20%;
-            right: 20%;
-            top: 50%;
-            height: 5px;
-            background: white;
-            box-shadow: 40px 0 0 white;
-        }
-
-        .cards {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            padding: 20px 8% 50px;
-        }
-
-        .card {
-            width: 250px;
-            padding: 25px;
-            text-align: center;
-            background: rgba(255,255,255,0.15);
-            border-radius: 15px;
-            border: 1px solid rgba(255,255,255,0.3);
-        }
-
-        .card .icon {
-            font-size: 40px;
-        }
-
-        .card h3 {
-            margin: 12px 0;
-            color: #ffe082;
-        }
-
-        .card p {
-            font-size: 15px;
-            line-height: 1.4;
-        }
-
-        footer {
-            text-align: center;
-            padding: 18px;
-            background: rgba(0,0,0,0.2);
-        }
-
-        @media(max-width: 800px) {
-            .hero {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .text, .medical {
-                width: 100%;
-            }
-
-            .text h1 {
-                font-size: 45px;
-            }
-
-            .cards {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-    </style>
+<link rel="stylesheet"href="style.css">
+   
 </head>
 
 <body>
@@ -154,8 +12,15 @@
         <div class="logo">🩸 Blood Bank</div>
 
         <nav>
-            <a href="index.html">Home</a>
-            <a href="login.html">Login</a>
+           
+<nav>
+    <a href="index.html">Home</a>
+    <a href="request.html">Request Blood</a>
+    <a href="status.html">Check Status</a>
+    <a href="login.html">Login</a>
+</nav>
+
+             
         </nav>
     </header>
 

@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Blood | Blood Bank</title>
+    <link rel="stylesheet" href="request.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">🩸 Blood Bank</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="request.html">Request Blood</a>
+            <a href="status.html">Check Status</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </header>
+
+    <main class="request-container">
+        <div class="page-heading">
+            <h1>Request Blood</h1>
+            <p>Fill in the details to help us find blood availability.</p>
+        </div>
+
+        <form id="bloodRequestForm">
+            <div class="form-group">
+                <label for="patientName">Patient Name</label>
+                <input type="text" id="patientName"
+                       placeholder="Enter patient name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="contact">Contact Number</label>
+                <input type="tel" id="contact"
+                       placeholder="10-digit mobile number"
+                       pattern="[6-9][0-9]{9}"
+                       maxlength="10" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="bloodGroup">Blood Group</label>
+                    <select id="bloodGroup" required>
+                        <option value="">Select group</option>
+                        <option>A+</option>
+                        <option>A-</option>
+                        <option>B+</option>
+                        <option>B-</option>
+                        <option>AB+</option>
+                        <option>AB-</option>
+                        <option>O+</option>
+                        <option>O-</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="units">Required Units</label>
+                    <select id="units" required>
+                        <option value="">Select units</option>
+                        <option value="1">1 unit</option>
+                        <option value="2">2 units</option>
+                        <option value="3">3 units</option>
+                        <option value="4">4 units</option>
+                        <option value="5">5 units</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" id="city"
+                       placeholder="Enter city" required>
+            </div>
+
+            <div class="form-group">
+                <label for="hospital">Hospital Name</label>
+                <input type="text" id="hospital"
+                       placeholder="Enter hospital name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="urgency">Urgency</label>
+                <select id="urgency" required>
+                    <option value="">Select urgency</option>
+                    <option value="Normal">Normal</option>
+                    <option value="Urgent">Urgent</option>
+                    <option value="Emergency">Emergency</option>
+                </select>
+            </div>
+
+            <p class="privacy-note">
+                Your information will be used to process this blood request.
+                It should only be shared with authorized centres when needed.
+            </p>
+
+            <label class="consent">
+                <input type="checkbox" id="consent" required>
+                I agree to share the necessary request details with an
+                authorized hospital or blood centre.
+            </label>
+
+            <button type="submit">Submit Blood Request</button>
+            <p id="message" role="status" aria-live="polite"></p>
+        </form>
+    </main>
+
+    <footer>
+        Blood Bank Management System | Saving Lives Together
+    </footer>
+
+    <script src="request.js"></script>
+</body>
+</html>
