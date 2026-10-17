@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital / NGO Dashboard</title>
+    <link rel="stylesheet" href="hospital-dashboard.css">
+    <script src="hospital-dashboard.js" defer></script>
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <h2>🩸 BLOOD</h2>
+            <p class="subtitle">Centre Portal</p>
+
+            <nav>
+                <a href="#dashboard" class="nav-link active" data-section="dashboard">Dashboard</a>
+                <a href="#inventory" class="nav-link" data-section="inventory">Blood Inventory</a>
+                <a href="#requests" class="nav-link" data-section="requests">Assigned Requests</a>
+                <a href="#profile" class="nav-link" data-section="profile">Centre Profile</a>
+            </nav>
+
+            <button id="logoutBtn" class="logout">Logout</button>
+        </aside>
+
+        <main class="main">
+            <header class="topbar">
+                <div>
+                    <p class="eyebrow">CENTRE MANAGEMENT</p>
+                    <h1 id="welcomeTitle">Hospital / NGO Dashboard</h1>
+                </div>
+                <span class="account" id="accountName">Centre Account</span>
+            </header>
+
+            <section id="dashboard" class="page-section">
+                <div class="heading-row">
+                    <div>
+                        <h2>Dashboard Overview</h2>
+                        <p class="muted">Manage blood stock and assigned requests.</p>
+                    </div>
+                    <button class="primary" data-go="inventory">+ Update Stock</button>
+                </div>
+
+                <div class="stats">
+                    <article class="stat-card">
+                        <p>Blood Groups Available</p>
+                        <h2 id="groupsListed">0</h2>
+                    </article>
+                    <article class="stat-card">
+                        <p>Total Blood Units</p>
+                        <h2 id="totalUnits">0</h2>
+                    </article>
+                    <article class="stat-card">
+                        <p>Assigned Requests</p>
+                        <h2 id="totalRequests">0</h2>
+                    </article>
+                    <article class="stat-card">
+                        <p>Fulfilled Requests</p>
+                        <h2 id="fulfilledRequests">0</h2>
+                    </article>
+                </div>
+
+                <div class="columns">
+                    <article class="panel">
+                        <h2>Blood Inventory Summary</h2>
+                        <p class="muted">Available units by blood group</p>
+                        <div id="inventorySummary" class="blood-grid"></div>
+                    </article>
+
+                    <article class="panel">
+                        <h2>Recent Requests</h2>
+                        <p class="muted">Requests assigned to this centre</p>
+                        <div id="recentRequests">
+                            <p class="empty">No requests assigned yet.</p>
+                        </div>
+                    </article>
+                </div>
+
+                <p class="notice">
+                    Demo version: inventory and profile are saved in this browser.
+                    Shared requests need a backend/database connection.
+                </p>
+            </section>
+
+            <section id="inventory" class="page-section hidden">
+                <div class="section-heading">
+                    <h2>Blood Inventory</h2>
+                    <p class="muted">Update the available units for every blood group.</p>
+                </div>
+
+                <form id="inventoryForm" class="panel">
+                    <div id="inventoryFields" class="blood-grid"></div>
+                    <button class="primary" type="submit">Save Inventory</button>
+                    <p id="inventoryMessage" class="success-message"></p>
+                </form>
+            </section>
+
+            <section id="requests" class="page-section hidden">
+                <div class="section-heading">
+                    <h2>Assigned Requests</h2>
+                    <p class="muted">Review requests assigned by the admin.</p>
+                </div>
+
+                <article class="panel">
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Request ID</th>
+                                    <th>Patient</th>
+                                    <th>Blood Group</th>
+                                    <th>Units</th>
+                                    <th>Status</th>
+                                    <th>Update Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="requestsTableBody"></tbody>
+                        </table>
+                    </div>
+                    <p id="requestsEmpty" class="empty">
+                        No requests assigned to this centre yet.
+                    </p>
+                </article>
+            </section>
+
+            <section id="profile" class="page-section hidden">
+                <div class="section-heading">
+                    <h2>Centre Profile</h2>
+                    <p class="muted">Add your hospital or NGO details.</p>
+                </div>
+
+                <form id="profileForm" class="panel profile-form">
+                    <label>Centre Type
+                        <select id="centreType" required>
+                            <option value="Hospital">Hospital</option>
+                            <option value="NGO">NGO</option>
+                        </select>
+                    </label>
+
+                    <label>Hospital / NGO Name
+                        <input id="centreName" type="text" required placeholder="Enter centre name">
+                    </label>
+
+                    <label>Contact Number
+                        <input id="centrePhone" type="tel" pattern="[0-9]{10}" maxlength="10"
+                               required placeholder="10-digit mobile number">
+                    </label>
+
+                    <label>City
+                        <input id="centreCity" type="text" required placeholder="Enter city">
+                    </label>
+
+                    <label>Email Address
+                        <input id="centreEmail" type="email" placeholder="Enter email address">
+                    </label>
+
+                    <button class="primary" type="submit">Save Profile</button>
+                    <p id="profileMessage" class="success-message"></p>
+                </form>
+            </section>
+
+            <footer>Blood Bank Management System | Saving Lives Together</footer>
+        </main>
+    </div>
+</body>
+</html>

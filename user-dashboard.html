@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard | Blood Bank</title>
+    <link rel="stylesheet" href="user-dashboard.css">
+    <script src="user-dashboard.js" defer></script>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <h2>🩸 BLOOD</h2>
+        <p class="subtitle">Donation System</p>
+
+        <a class="active" href="#dashboard">Dashboard</a>
+        <a href="#requests">My Requests</a>
+        <a href="#profile">My Profile</a>
+        <a href="#notifications">Notifications</a>
+        <a href="#availability">Blood Availability</a>
+        <a href="#hospitals">Hospitals / NGOs</a>
+
+        <button id="logoutBtn" class="logout">Logout</button>
+    </aside>
+
+    <main class="main-content" id="dashboard">
+
+        <header class="topbar">
+            <div>
+                <h1>User Dashboard</h1>
+                <p>Manage your blood requests and track their status.</p>
+            </div>
+            <div class="user-info">
+                <div class="avatar" id="avatar">U</div>
+                <span id="headerName">User</span>
+            </div>
+        </header>
+
+        <section class="welcome">
+            <h2>Welcome, <span id="welcomeName">User</span> 👋</h2>
+            <p>Every drop counts. We are here to help you find blood when you need it.</p>
+        </section>
+
+        <section class="stats">
+            <div class="stat-card">
+                <p>Total Requests</p>
+                <h2 id="totalRequests">0</h2>
+            </div>
+            <div class="stat-card">
+                <p>In Progress</p>
+                <h2 id="progressRequests">0</h2>
+            </div>
+            <div class="stat-card">
+                <p>Fulfilled</p>
+                <h2 id="fulfilledRequests">0</h2>
+            </div>
+            <div class="stat-card">
+                <p>Cancelled</p>
+                <h2 id="cancelledRequests">0</h2>
+            </div>
+        </section>
+
+        <section class="panel" id="requests">
+            <div class="section-heading">
+                <div>
+                    <h2>My Blood Requests</h2>
+                    <p>View your previous requests and their status.</p>
+                </div>
+                <button id="newRequestBtn">+ New Request</button>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Request ID</th>
+                            <th>Blood Group</th>
+                            <th>Units</th>
+                            <th>Status</th>
+                            <th>Requested On</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="requestTableBody"></tbody>
+                </table>
+            </div>
+
+            <p id="emptyRequests">No requests yet. Click New Request to get started.</p>
+        </section>
+
+        <section class="panel form-panel" id="newRequestSection" hidden>
+            <div class="section-heading">
+                <h2>New Blood Request</h2>
+                <button type="button" id="cancelFormBtn" class="secondary">Cancel</button>
+            </div>
+
+            <form id="requestForm">
+                <div class="form-grid">
+                    <label>Blood Group *
+                        <select id="bloodGroup" required>
+                            <option value="">Select Blood Group</option>
+                            <option>A+</option>
+                            <option>A-</option>
+                            <option>B+</option>
+                            <option>B-</option>
+                            <option>AB+</option>
+                            <option>AB-</option>
+                            <option>O+</option>
+                            <option>O-</option>
+                        </select>
+                    </label>
+
+                    <label>Units Required *
+                        <input type="number" id="units" min="1" max="20"
+                               placeholder="e.g. 2" required>
+                    </label>
+
+                    <label>Patient Name *
+                        <input type="text" id="patientName"
+                               placeholder="Enter patient name" required>
+                    </label>
+
+                    <label>Contact Number *
+                        <input type="tel" id="contact"
+                               placeholder="10-digit mobile number"
+                               pattern="[0-9]{10}" maxlength="10" required>
+                    </label>
+
+                    <label>Hospital Name *
+                        <input type="text" id="hospitalName"
+                               placeholder="Enter hospital name" required>
+                    </label>
+
+                    <label>City *
+                        <input type="text" id="city"
+                               placeholder="Enter city" required>
+                    </label>
+
+                    <label class="full-width">Request Details
+                        <textarea id="details" rows="3"
+                                  placeholder="Additional information (optional)"></textarea>
+                    </label>
+                </div>
+
+                <p class="note">This demo saves requests in your browser. It does not notify hospitals automatically.</p>
+
+                <button type="submit">Submit Request</button>
+                <p id="formMessage"></p>
+            </form>
+        </section>
+
+        <section class="lower-grid">
+            <div class="panel" id="profile">
+                <h2>My Profile</h2>
+                <form id="profileForm">
+                    <label>Full Name
+                        <input type="text" id="profileName" required>
+                    </label>
+                    <label>Email Address
+                        <input type="email" id="profileEmail" required>
+                    </label>
+                    <button type="submit">Save Profile</button>
+                    <p id="profileMessage"></p>
+                </form>
+            </div>
+
+            <div class="panel" id="notifications">
+                <h2>Notifications</h2>
+                <div id="notificationList">
+                    <p>No new notifications.</p>
+                </div>
+            </div>
+
+            <div class="panel" id="availability">
+                <h2>Blood Availability</h2>
+                <label>Select Blood Group
+                    <select id="availabilityGroup">
+                        <option value="">Select Blood Group</option>
+                        <option>A+</option><option>A-</option>
+                        <option>B+</option><option>B-</option>
+                        <option>AB+</option><option>AB-</option>
+                        <option>O+</option><option>O-</option>
+                    </select>
+                </label>
+                <p id="availabilityResult">Live inventory is not connected yet.</p>
+            </div>
+
+            <div class="panel" id="hospitals">
+                <h2>Hospitals / NGOs</h2>
+                <p>Registered centres will appear here when connected by the admin.</p>
+                <div id="centreList">No centres added yet.</div>
+            </div>
+        </section>
+
+        <footer>Blood Bank Management System | Saving Lives Together</footer>
+    </main>
+
+</body>
+</html>
