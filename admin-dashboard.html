@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Blood Bank</title>
+    <link rel="stylesheet" href="./admin-dashboard.css">
+    <script src="admin-dashboard.js" defer></script>
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <h2>🩸 BLOOD </h2>
+            <p class="subtitle">Admin Panel</p>
+
+            <nav>
+                <a href="#overview" class="nav-link active" data-section="overview">Dashboard</a>
+                <a href="#requests" class="nav-link" data-section="requests">Blood Requests</a>
+                <a href="#centres" class="nav-link" data-section="centres">Hospitals / NGOs</a>
+                <a href="#inventory" class="nav-link" data-section="inventory">Blood Inventory</a>
+            </nav>
+
+            <button id="logoutBtn" class="logout">Logout</button>
+        </aside>
+
+        <main class="main">
+            <header class="topbar">
+                <div>
+                    <p class="eyebrow">ADMINISTRATION</p>
+                    <h1>Admin Dashboard</h1>
+                    <p class="muted">Manage blood requests and registered centres.</p>
+                </div>
+                <span class="account">Administrator</span>
+            </header>
+
+            <section id="overview" class="page-section">
+                <h2>Overview</h2>
+
+                <div class="stats">
+                    <article class="stat-card">
+                        <p>Registered Users</p>
+                        <h2 id="totalUsers">0</h2>
+                    </article>
+                    <article class="stat-card">
+                        <p>Hospitals / NGOs</p>
+                        <h2 id="totalCentres">0</h2>
+                    </article>
+                    <article class="stat-card">
+                        <p>Total Requests</p>
+                        <h2 id="totalRequests">0</h2>
+                    </article>
+                    <article class="stat-card">
+                        <p>Pending Requests</p>
+                        <h2 id="pendingRequests">0</h2>
+                    </article>
+                </div>
+
+                <article class="panel">
+                    <h2>Recent Blood Requests</h2>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Request ID</th>
+                                    <th>Patient</th>
+                                    <th>Blood Group</th>
+                                    <th>Units</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentTableBody"></tbody>
+                        </table>
+                    </div>
+                    <p id="recentEmpty" class="empty">No blood requests found.</p>
+                </article>
+            </section>
+
+            <section id="requests" class="page-section hidden">
+                <h2>Blood Requests</h2>
+                <p class="muted">Review requests and assign them to a registered centre.</p>
+
+                <article class="panel">
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Request ID</th>
+                                    <th>Patient</th>
+                                    <th>Blood Group</th>
+                                    <th>Units</th>
+                                    <th>Status</th>
+                                    <th>Assign Centre</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="requestsTableBody"></tbody>
+                        </table>
+                    </div>
+                    <p id="requestsEmpty" class="empty">No blood requests found.</p>
+                    <p id="requestMessage" class="success-message"></p>
+                </article>
+            </section>
+
+            <section id="centres" class="page-section hidden">
+                <h2>Registered Hospitals / NGOs</h2>
+                <p class="muted">Centres registered through the registration form.</p>
+
+                <article class="panel">
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Phone</th>
+                                </tr>
+                            </thead>
+                            <tbody id="centresTableBody"></tbody>
+                        </table>
+                    </div>
+                    <p id="centresEmpty" class="empty">No registered hospitals or NGOs found.</p>
+                </article>
+            </section>
+
+            <section id="inventory" class="page-section hidden">
+                <h2>Blood Inventory Overview</h2>
+                <p class="muted">Shows inventory saved in this browser by the centre dashboard.</p>
+
+                <div id="inventoryGrid" class="blood-grid"></div>
+
+                <p class="notice">
+                    This is a front-end demo. Inventory is not yet separated by centre
+                    and is not connected to a shared database.
+                </p>
+            </section>
+
+            <footer>Blood Bank Management System | Admin Panel</footer>
+        </main>
+    </div>
+</body>
+</html>

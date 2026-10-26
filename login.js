@@ -1,38 +1,21 @@
-document.addEventListener("DOMContentLoaded", function () {
 
+document.addEventListener("DOMContentLoaded", function () {
     const loginForm = document.getElementById("login");
     const registerForm = document.getElementById("register");
 
-    const loginFormBox = document.getElementById("loginForm");
-    const registerFormBox = document.getElementById("registerForm");
-
-    const showLogin = document.getElementById("showLogin");
     const showRegister = document.getElementById("showRegister");
+    const showLogin = document.getElementById("showLogin");
 
-    const message = document.getElementById("message");
-
-    // Get registered users
-    function getUsers() {
-        try {
-            const users = JSON.parse(
-                localStorage.getItem("bloodBankUsers") || "[]"
-            );
-
-            return Array.isArray(users) ? users : [];
-        } catch (error) {
-            return [];
-        }
-    }
+    const loginMessage = document.getElementById("loginMessage");
+    const registerMessage = document.getElementById("registerMessage");
 
     // Show registration form
     if (showRegister) {
         showRegister.addEventListener("click", function (event) {
             event.preventDefault();
 
-            loginFormBox.classList.add("hidden");
-            registerFormBox.classList.remove("hidden");
-
-            message.textContent = "";
+            document.getElementById("loginForm").classList.add("hidden");
+            document.getElementById("registerForm").classList.remove("hidden");
         });
     }
 
@@ -41,11 +24,18 @@ document.addEventListener("DOMContentLoaded", function () {
         showLogin.addEventListener("click", function (event) {
             event.preventDefault();
 
-            registerFormBox.classList.add("hidden");
-            loginFormBox.classList.remove("hidden");
-
-            message.textContent = "";
+            document.getElementById("registerForm").classList.add("hidden");
+            document.getElementById("loginForm").classList.remove("hidden");
         });
+    }
+
+    // Get registered users
+    function getUsers() {
+        try {
+            return JSON.parse(localStorage.getItem("bloodbankUsers") || "[]");
+        } catch (error) {
+            return [];
+        }
     }
 
     // Register a new user
@@ -53,66 +43,77 @@ document.addEventListener("DOMContentLoaded", function () {
         registerForm.addEventListener("submit", function (event) {
             event.preventDefault();
 
-            const name = document.getElementById("name").value.trim();
-            const email = document.getElementById("email").value
-                .trim().toLowerCase();
-            const phone = document.getElementById("phone").value.trim();
-            const role = document.getElementById("role").value;
-            const password = document.getElementById("password").value;
+            const name = registerForm.querySelector("#name")?.value.trim();
+            const email = registerForm.querySelector("#email")?.value.trim().toLowerCase();
+            const phone = registerForm.querySelector("#phone")?.value.trim();
+            const role = registerForm.querySelector("#role")?.value;
+            const password = registerForm.querySelector("#password")?.value;
 
             if (!name || !email || !phone || !role || !password) {
-                message.style.color = "red";
-                message.textContent = "Please fill all required fields.";
+                alert("Please fill all fields.");
+                return;
+            }
+
+            if (!["user", "hospital", "ngo"].includes(role)) {
+                alert("Please select a valid user type.");
                 return;
             }
 
             const users = getUsers();
 
-            const existingUser = users.find(function (item) {
-                return item.email.toLowerCase() === email;
-            });
-
-            if (existingUser) {
-                message.style.color = "red";
-                message.textContent = "Email already registered. Please login.";
+            if (users.some(user => user.email.toLowerCase() === email)) {
+                if (registerMessage) {
+                    registerMessage.style.color = "red";
+                    registerMessage.textContent = "Email already registered. Please login.";
+                } else {
+                    alert("Email already registered. Please login.");
+                }
                 return;
             }
 
-            const newUser = {
+            users.push({
                 name: name,
                 email: email,
                 phone: phone,
                 role: role,
                 password: password
-            };
+            });
 
-            users.push(newUser);
+            localStorage.setItem("bloodbankUsers", JSON.stringify(users));
 
-            localStorage.setItem(
-                "bloodBankUsers",
-                JSON.stringify(users)
-            );
-
-            message.style.color = "green";
-            message.textContent = "Registration successful! Please login.";
+            if (registerMessage) {
+                registerMessage.style.color = "green";
+                registerMessage.textContent = "Registration successful! Please login.";
+            } else {
+                alert("Registration successful! Please login.");
+            }
 
             registerForm.reset();
 
-            registerFormBox.classList.add("hidden");
-            loginFormBox.classList.remove("hidden");
+            document.getElementById("registerForm").classList.add("hidden");
+            document.getElementById("loginForm").classList.remove("hidden");
         });
     }
 
-    // Login existing user
+    // Login
     if (loginForm) {
         loginForm.addEventListener("submit", function (event) {
             event.preventDefault();
 
-            const email = document.getElementById("loginEmail")
-                .value.trim().toLowerCase();
+            const email = loginForm.querySelector("#loginEmail")?.value.trim().toLowerCase();
+            const password = loginForm.querySelector("#loginPassword")?.value;
 
-            const password = document.getElementById("loginPassword").value;
+            // Fixed Admin login
+            if (email === "lochanasuyal@gmail.com" && password === "lochana2005") {
+                localStorage.setItem("loggedInUser", "Admin");
+                localStorage.setItem("loggedInEmail", email);
+                localStorage.setItem("loggedInRole", "admin");
 
+                window.location.href = "admin-dashboard.html";
+                return;
+            }
+
+            // Login for registered users
             const users = getUsers();
 
             const user = users.find(function (item) {
@@ -121,32 +122,27 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             if (!user) {
-                message.style.color = "red";
-                message.textContent = "Invalid email or password.";
+                if (loginMessage) {
+                    loginMessage.style.color = "red";
+                    loginMessage.textContent = "Invalid email or password.";
+                } else {
+                    alert("Invalid email or password.");
+                }
                 return;
             }
 
-            // Save login details
             localStorage.setItem("loggedInUser", user.name);
             localStorage.setItem("loggedInEmail", user.email);
-            localStorage.setItem("loggedInRole", user.role || "user");
+            localStorage.setItem("loggedInRole", user.role);
 
-            message.style.color = "green";
-            message.textContent = "Welcome, " + user.name + "!";
-
-            // Redirect according to user role
-            setTimeout(function () {
-                const role = (user.role || "user").toLowerCase();
-
-                if (role === "hospital" || role === "ngo") {
-                    window.location.href = "hospital-dashboard.html";
-                } else if (role === "admin") {
-                    window.location.href = "admin-dashboard.html";
-                } else {
-                    window.location.href = "user-dashboard.html";
-                }
-            }, 500);
+            // Redirect according to role
+            if (user.role === "hospital" || user.role === "ngo") {
+                window.location.href = "hospital-dashboard.html";
+            } else if (user.role === "admin") {
+                window.location.href = "admin-dashboard.html";
+            } else {
+                window.location.href = "user-dashboard.html";
+            }
         });
     }
-
 });
