@@ -4,6 +4,7 @@ import "./App.css";
 import Login from "./Login";
 import UserDashboard from "./UserDashboard";
 import HospitalDashboard from "./HospitalDashboard";
+import AdminDashboard from "./Admindashboard";
 function App() {
   const [showLogin, setShowLogin] = useState(
     window.location.hash === "#login"
@@ -169,19 +170,15 @@ function App() {
   }
 
   // Admin dashboard
-  return (
-    <div className="simple-dashboard">
-      <header className="dashboard-header">
-        <h2>🩸 Blood Bank</h2>
-        <button onClick={handleLogout}>Logout</button>
-      </header>
 
-      <main className="dashboard-welcome">
-        <h1>Welcome, {name}!</h1>
-        <p>Admin Dashboard — Blood requests aur centres manage karo.</p>
-      </main>
-    </div>
+  // Admin dashboard
+  return (
+    <AdminDashboard
+      user={loggedInUser}
+      onLogout={handleLogout}
+    />
   );
 }
 
 export default App;
+
